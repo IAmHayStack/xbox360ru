@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>RU-XBOX.RU | СВОРА СВОИХ ПАЦАНОВ</title>
+    
+    <!-- Подключаем шрифты: крутой геймерский стиль -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at 20% 20%, #0a2a1a, #041008);
+            color: #ffffff;
+            line-height: 1.5;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Декоративный фон с паттерном Xbox */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 30% 40%, rgba(16, 185, 129, 0.08) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(5, 150, 105, 0.05) 0%, transparent 40%),
+                repeating-linear-gradient(45deg, rgba(0, 255, 0, 0.01) 0px, rgba(0, 255, 0, 0.01) 2px, transparent 2px, transparent 8px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* === АНИМАЦИИ === */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.6), 0 0 60px rgba(16, 185, 129, 0.2); }
+            100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* === ХЕДЕР === */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid rgba(16, 185, 129, 0.3);
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .logo-icon {
+            font-size: 3.5rem;
+            color: #10b981;
+            filter: drop-shadow(0 0 15px #10b981);
+        }
+
+        .logo-text h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #10b981, #34d399, #6ee7b7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+        }
+
+        .logo-text p {
+            font-size: 0.9rem;
+            color: #a7f3d0;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        .online-badge {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1.5px solid #10b981;
+            padding: 12px 24px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .pulse-dot {
+            width: 12px;
+            height: 12px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #10b981;
+            animation: pulseGlow 2s infinite;
+        }
+
+        .online-badge span {
+            font-weight: 700;
+            color: #d1fae5;
+        }
+
+        /* === ГЛАВНЫЙ БАННЕР === */
+        .hero {
+            background: linear-gradient(135deg, rgba(6, 46, 30, 0.9) 0%, rgba(2, 20, 10, 0.95) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 40px;
+            padding: 50px 40px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(16, 185, 129, 0.1) inset;
+        }
+
+        .hero::after {
+            content: "🎮";
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            font-size: 200px;
+            opacity: 0.03;
+            transform: rotate(-15deg);
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #fff, #a7f3d0, #10b981);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-sub {
+            font-size: 1.5rem;
+            color: #d1fae5;
+            margin-bottom: 30px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 36px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+            border: 1px solid #34d399;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.6);
+            background: linear-gradient(135deg, #34d399, #10b981);
+        }
+
+        .btn-secondary {
+            background: rgba(16, 185, 129, 0.1);
+            color: #a7f3d0;
+            border: 1.5px solid #10b981;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(16, 185, 129, 0.25);
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        /* === СЕКЦИЯ ФИЧ === */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .feature-card {
+            background: rgba(6, 46, 30, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 30px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: #10b981;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.2);
+            background: rgba(10, 60, 40, 0.6);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #10b981;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px #10b981);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #ecfdf5;
+        }
+
+        .feature-card p {
+            color: #a7f3d0;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        /* === БЛОК С ПРИКОЛАМИ === */
+        .vibe-section {
+            background: linear-gradient(135deg, #041f12, #021008);
+            border-radius: 40px;
+            padding: 50px 40px;
+            margin-bottom: 50px;
+            border: 1px solid #10b981;
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.15), inset 0 0 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #d1fae5;
+        }
+
+        .section-title i {
+            color: #10b981;
+            filter: drop-shadow(0 0 8px #10b981);
+        }
+
+        .vibe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .vibe-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .vibe-emoji {
+            font-size: 2.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            border: 1px solid #10b981;
+        }
+
+        .vibe-text h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ecfdf5;
+            margin-bottom: 5px;
+        }
+
+        .vibe-text p {
+            color: #6ee7b7;
+            font-weight: 500;
+        }
+
+        /* === ПРИСОЕДИНЯЙСЯ БЛОК === */
+        .join-block {
+            background: linear-gradient(135deg, #10b981, #047857);
+            border-radius: 50px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 50px;
+            box-shadow: 0 30px 40px rgba(2, 60, 30, 0.6);
+            border: 1px solid #34d399;
+            animation: pulseGlow 3s infinite;
+        }
+
+        .join-block h3 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        }
+
+        .join-block p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #ecfdf5;
+        }
+
+        .join-btn {
+            background: white;
+            color: #064e3b;
+            padding: 22px 55px;
+            font-size: 1.8rem;
+            font-weight: 900;
+            border-radius: 100px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border: 3px solid #a7f3d0;
+        }
+
+        .join-btn i {
+            color: #10b981;
+        }
+
+        .join-btn:hover {
+            background: #ecfdf5;
+            transform: scale(1.05);
+        }
+
+        /* === ФУТЕР === */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(16, 185, 129, 0.3);
+            margin-top: 40px;
+            color: #6ee7b7;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-links a {
+            color: #a7f3d0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #10b981;
+            text-shadow: 0 0 8px #10b981;
+        }
+
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            .header { flex-direction: column; text-align: center; }
+            .logo-text h1 { font-size: 2rem; }
+            .hero h2 { font-size: 2.2rem; }
+            .hero { padding: 30px 20px; }
+            .hero-sub { font-size: 1.2rem; }
+            .btn { padding: 15px 25px; font-size: 1rem; }
+            .section-title { font-size: 1.8rem; }
+            .join-block h3 { font-size: 2.2rem; }
+            .join-btn { font-size: 1.3rem; padding: 18px 35px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Хедер -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fab fa-xbox"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>RU-XBOX.RU</h1>
+                    <p>СВОРА СВОИХ ПАЦАНОВ</p>
+                </div>
+            </div>
+            <div class="online-badge">
+                <span class="pulse-dot"></span>
+                <span>ОНЛАЙН 24/7 <i class="fas fa-fire" style="margin-left: 5px; color: #f59e0b;"></i></span>
+                <span style="margin-left: 10px; background: #10b98120; padding: 5px 10px; border-radius: 30px; font-weight: 800;">1480+ ИГРОКОВ</span>
+            </div>
+        </header>
+
+        <!-- Главный баннер -->
+        <section class="hero">
+            <h2>
+                <span class="hero-gradient">ЗАЕБАЛ</span> СОЛО-РЕЖИМ<br>
+                В ЭТОЙ ЖИЗНИ? 🤨💢
+            </h2>
+            <div class="hero-sub">
+                <i class="fas fa-skull" style="color: #10b981;"></i>
+                <span>ТУТ НЕ ПРИЮТ ДЛЯ БЛАГОРОДНЫХ ДЕВИЦ</span>
+                <i class="fas fa-gamepad" style="color: #34d399;"></i>
+            </div>
+            <p style="font-size: 1.3rem; margin-bottom: 30px; color: #d1fae5; max-width: 800px;">
+                Мы строим <strong style="color: #6ee7b7;">ЭЛИТНЫЙ МЕЖДУСОБОЙЧИК</strong> для тех, кто рубит в Xbox так же жестко, как батя ремень в детстве. 
+                Никаких токсиков, только хайп, угар и сраные ачивки до утра.
+            </p>
+            <div class="hero-buttons">
+                <a href="https://discord.gg/73vPaH5pD8" target="_blank" class="btn btn-primary"><i class="fab fa-discord"></i> ЗАЛЕТЕТЬ В БАНДУ</a>
+                <a href="https://discord.gg/73vPaH5pD8" target="_blank" class="btn btn-secondary"><i class="fab fa-discord"></i> DISCORD СЕРВЕР</a>
+            </div>
+        </section>
+
+        <!-- Фичи -->
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-newspaper"></i></div>
+                <h3>ИНФА СОТКА 🔥</h3>
+                <p>Сливаем новости Game Pass так быстро, что Major Nelson икает. Узнаешь, что халяву раздают, пока лохи спят.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                <h3>ВОЙС ДЛЯ СВОИХ 🛋️</h3>
+                <p>Говоришь "залетаю" и орешь благим матом, когда тебя мобы рвут. Поддержим, поржем, похороним с честью.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-coins"></i></div>
+                <h3>НИЩЕБРОДСТВО? НЕ-А 💸</h3>
+                <p>Научим шакалить регионы. Платить 7к за подписку — удел лохов. Мы люди экономные, но с жирными библиотеками.</p>
+            </div>
+        </div>
+
+        <!-- Вайб секция -->
+        <section class="vibe-section">
+            <div class="section-title">
+                <i class="fas fa-bolt"></i>
+                <span>ПО СУТИ ЧЕ ЗА ДВИЖ?</span>
+                <i class="fas fa-bolt"></i>
+            </div>
+            <div class="vibe-grid">
+                <div class="vibe-item">
+                    <div class="vibe-emoji">🤝🔥</div>
+                    <div class="vibe-text">
+                        <h4>Ебать-колотить, какие тут свои!</h4>
+                        <p>Ребята с понятиями. Могут и по хребту настучать в шутере, и потом заботливо спросить: "Ну че, братишка, живой?"</p>
+                    </div>
+                </div>
+                <div class="vibe-item">
+                    <div class="vibe-emoji">😎🪖</div>
+                    <div class="vibe-text">
+                        <h4>Лютый смайлопак</h4>
+                        <p>Чиф с лицом "ну и хули ты наделал" и Фил Спенсер, смотрящий на твой кошелек с сочувствием.</p>
+                    </div>
+                </div>
+                <div class="vibe-item">
+                    <div class="vibe-emoji">🍻🧛</div>
+                    <div class="vibe-text">
+                        <h4>Игровые алкаши и гоблины</h4>
+                        <p>Нормальные пацаны нагибают в Forza только после того, как дети и жена уснули. Факт.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Join блок -->
+        <div class="join-block">
+            <h3>ХОРОШ ДРОЧИТЬ В ОДИНОЧКУ</h3>
+            <p>Кликай сюды и будь что будет. Обещаем уют, подколы и ноль занудства.</p>
+            <a href="https://discord.gg/73vPaH5pD8" target="_blank" class="btn join-btn"><i class="fab fa-discord"></i> ТЫК СЮДА, НЕ БУДЬ ХЛЕБУШКОМ <i class="fas fa-arrow-right"></i></a>
+            <p style="margin-top: 20px; font-size: 1.1rem; opacity: 0.9;">👾 ЗАЛЕТАЙ, ТУТ ТЕПЛО, ЛАМПОВО И МАТЮГАЛЬНО 👾</p>
+        </div>
+
+        <!-- Футер -->
+        <footer class="footer">
+            <div>
+                <span style="font-weight: 800; font-size: 1.5rem;">RU-XBOX.RU</span> 
+                <span style="margin-left: 15px; color: #34d399;">© 2026 | НЕ ФАКТ ЧТО ВЫЙДЕШЬ</span>
+            </div>
+            <div class="footer-links">
+                <a href="https://discord.gg/73vPaH5pD8" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+                <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
+                <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+                <a href="#"><i class="fas fa-globe"></i> Сайт</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Маленький скрипт для живого обновления онлайна (просто для атмосферы) -->
+    <script>
+        (function() {
+            const onlineSpan = document.querySelector('.online-badge span:last-child');
+            if (onlineSpan) {
+                let count = 1480;
+                setInterval(() => {
+                    const change = Math.floor(Math.random() * 30) - 10;
+                    count = Math.max(1400, Math.min(1600, count + change));
+                    onlineSpan.textContent = count + '+ ИГРОКОВ';
+                }, 5000);
+            }
+
+            // Добавляем обработку всех ссылок с классом btn, чтобы открывались в новой вкладке
+            document.querySelectorAll('a[href="https://discord.gg/73vPaH5pD8"]').forEach(link => {
+                link.setAttribute('target', '_blank');
+                link.setAttribute('rel', 'noopener noreferrer');
+            });
+        })();
+    </script>
+
+</body>
+</html>
